@@ -1,2 +1,2 @@
 # Cimple
-Basic programs in C.
+Simple programs in C;
