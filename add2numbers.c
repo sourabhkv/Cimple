@@ -1,3 +1,4 @@
+//program to add two numbers
 #include <stdio.h>
 void main(){
 	printf("Program to add two numbers \n");
