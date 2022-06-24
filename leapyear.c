@@ -1,6 +1,5 @@
 #include <stdio.h>
 void main(){
-	//Check prime
 	int n;
 	printf("enter year :");
 	scanf("%d",&n);
