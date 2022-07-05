@@ -20,7 +20,7 @@ void main(){
 		}
 	}
 	else if (n==1){
-		printf("1 is composite");
+		printf("1 is neither composite not prime");
 	}
 	else{
 		printf("Enter valid number");
