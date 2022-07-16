@@ -1,3 +1,10 @@
+/* Expected output if n=5
+              *  *  *  *  *
+           *  *  *  *  *
+        *  *  *  *  *
+     *  *  *  *  *
+  *  *  *  *  *
+*/
 #include <stdio.h>
 void main(){
 	int n;
