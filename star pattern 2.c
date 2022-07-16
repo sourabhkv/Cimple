@@ -10,7 +10,7 @@ void main(){
 	int n;
 	printf("enter n:");
 	scanf("%d",&n);
-	for (int i=1;i<=5;i++){
+	for (int i=1;i<=n;i++){
 		for (int j=n-1;j>=i;j--){
 			printf("   ");
 		}
