@@ -23,4 +23,5 @@ Replace `<dir>` with your directory name and filename.c with your file eg. hello
 7. [Swap](https://github.com/sourabhkv/Cimple/blob/main/swap.c)
 8. [Leap year or not](https://github.com/sourabhkv/Cimple/blob/main/leapyear.c)
 9. [Reverse number](https://github.com/sourabhkv/Cimple/blob/main/reversenum.c)
-10. [Star pattern basic](https://github.com/sourabhkv/Cimple/blob/main/starpattern1.c)
+10. [Star pattern 1 basic](https://github.com/sourabhkv/Cimple/blob/main/starpattern1.c)
+11. [Star pattern 2](https://github.com/sourabhkv/Cimple/blob/main/star%20pattern%202.c)
