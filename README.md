@@ -26,3 +26,4 @@ Replace `<dir>` with your directory name and filename.c with your file eg. hello
 10. [Star pattern 1 basic](https://github.com/sourabhkv/Cimple/blob/main/starpattern1.c)
 11. [Star pattern 2](https://github.com/sourabhkv/Cimple/blob/main/star%20pattern%202.c)
 12. [Prime number over a range](https://github.com/sourabhkv/Cimple/blob/main/prime%20range.c)
+13. [Pascal triangle](https://github.com/sourabhkv/Cimple/blob/main/pascal%20triangle.c)
