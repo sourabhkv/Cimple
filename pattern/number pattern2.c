@@ -13,7 +13,7 @@ enter no. of rows :5
 #include <stdio.h>
 void main()
 {
-	int i,j,k,n,r;
+	int i,j,k,n;
 	printf("enter no. of rows :");
 	scanf("%d",&n);
 	for (i=1;i<=n;i++)
