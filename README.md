@@ -27,3 +27,5 @@ Replace `<dir>` with your directory name and filename.c with your file eg. hello
 11. [Star pattern 2](https://github.com/sourabhkv/Cimple/blob/main/pattern/star%20pattern%202.c)
 12. [Prime number over a range](https://github.com/sourabhkv/Cimple/blob/main/prime%20range.c)
 13. [Pascal triangle](https://github.com/sourabhkv/Cimple/blob/main/pascal%20triangle.c)
+14. [Add 2 matrices](https://github.com/sourabhkv/Cimple/blob/main/matrix/addmatrix.c)
+15. [Transpose of matrix](https://github.com/sourabhkv/Cimple/blob/main/matrix/transpose.c)
