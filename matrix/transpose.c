@@ -1,7 +1,8 @@
 /*
 OUTPUT
 
-enter row:3
+enter order of matrix mxn:3 4
+enter elements of matrix
 1
 2
 3
@@ -11,40 +12,46 @@ enter row:3
 7
 8
 9
-Before
-1       2       3
-4       5       6
-7       8       9
-Transposed
-1       4       7
-2       5       8
-3       6       9
+10
+11
+12
+matrix A
+1       2       3       4
+5       6       7       8
+9       10      11      12
 
+transposed matrix of A
+1       5       9
+2       6       10
+3       7       11
+4       8       12
 */
 
 #include <stdio.h>
-void main()
-{
-	int row,temp;
-	printf("enter row:");
-	scanf("%d",&row);
-	int matrix[row][row],trans[row][row];
-	for (int i=0;i<row;i++)
-		for (int j=0;j<row;j++)
-			scanf("%d",&matrix[i][j]);
-	printf("Before\n");
-	for (int i=0;i<row;i++){
-		for (int j=0;j<row;j++){
-			printf("%d\t",matrix[i][j]);
+void main(){
+	int m,n,i,j;
+	printf("enter order of matrix mxn:");
+	scanf("%d %d",&m,&n);
+	int a[m][n],b[n][m];
+	printf("enter elements of matrix\n");
+	for (i=0;i<m;i++){
+		for (j=0;j<n;j++){
+			scanf("%d",&a[i][j]);
+			b[j][i]=a[i][j];
+		}
+	}
+	
+	printf("\nmatrix A\n");
+	for (i=0;i<m;i++){
+		for (j=0;j<n;j++){
+			printf("%d\t",a[i][j]);
 		}
 		printf("\n");
 	}
-	printf("Transposed\n");
-
-	for (int i=0;i<row;i++){
-		for (int j=0;j<row;j++){
-			trans[i][j]=matrix[j][i];
-			printf("%d\t",trans[i][j]);
+	printf("\ntransposed matrix of A\n");
+	for (i=0;i<n;i++){
+		for (j=0;j<m;j++){
+			printf("%d\t",b[i][j]);
 		}
 		printf("\n");
 	}
