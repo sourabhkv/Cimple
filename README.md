@@ -29,3 +29,4 @@ Replace `<dir>` with your directory name and filename.c with your file eg. hello
 13. [Pascal triangle](https://github.com/sourabhkv/Cimple/blob/main/pascal%20triangle.c)
 14. [Add 2 matrices](https://github.com/sourabhkv/Cimple/blob/main/matrix/addmatrix.c)
 15. [Transpose of matrix](https://github.com/sourabhkv/Cimple/blob/main/matrix/transpose.c)
+16. [Selection sort](https://github.com/sourabhkv/Cimple/blob/main/selection_sort.c)
