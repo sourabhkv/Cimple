@@ -7,7 +7,7 @@ C is simple so Cimple<br>
 |:-|---|---|---|
 |Create directory| • `mkdir <dir>`| • `mkdir <dir>`|• `mkdir <dir>`|
 |Change directory| • `cd <dir>`| • `cd <dir>`| • `cd <dir>`|
-|Create blank .C file and edit| • `gedit filename.c` to create & launch .c file | • `type nul> filename.c` it will create blank .c file <br> • `filename.c` to launch .c file| • `New-Item -Path .\filename.c -ItemType File`|
+|Create blank .C file and edit| • `gedit filename.c` to create & launch .c file | • `type nul> filename.c` it will create blank .c file <br> • `filename.c` to launch .c file| • `New-Item -Path .\filename.c -ItemType File` to create file<br> • `notepad .\filename.c` to open file|
 |Compile .C file| • `cc filename.c` | • `gcc filename.c`| • `gcc .\filename.c`| 
 |Start executable| • `./a.out`| • `a.exe`<br> |• `.\a.exe`|
 
