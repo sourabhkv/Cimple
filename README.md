@@ -3,13 +3,13 @@ Simple programs in C;<br>
 C is simple so Cimple<br>
 
 # Commands<br>
-|task ⬇️/Command ➡️|**Linux** (terminal)|**Windows** (PowerShell or CMD)|
-|:-|---|---|
-|Create directory| • `mkdir <dir>`| • `mkdir <dir>`|
-|Change directory| • `cd <dir>`| • `cd <dir>`|
-|Create blank .C file and edit| • `gedit filename.c` to create & launch .c file | • `type nul> filename.c` it will create blank .c file <br> • `filename.c` to launch .c file|
-|Compile .C file| • `cc filename.c` | • `gcc filename.c`|
-|Start executable| • `./a.out`| • `a.exe` for CMD<br> • `.\a.exe` for PowerShell|
+|task ⬇️/Command ➡️|**Linux** (terminal)|**Windows** CMD|**Windows Powershell**|
+|:-|---|---|---|
+|Create directory| • `mkdir <dir>`| • `mkdir <dir>`|• `mkdir <dir>`|
+|Change directory| • `cd <dir>`| • `cd <dir>`| • `cd <dir>`|
+|Create blank .C file and edit| • `gedit filename.c` to create & launch .c file | • `type nul> filename.c` it will create blank .c file <br> • `filename.c` to launch .c file| • `New-Item -Path .\filename.c -ItemType File`|
+|Compile .C file| • `cc filename.c` | • `gcc filename.c`| • `gcc .\filename.c`| 
+|Start executable| • `./a.out`| • `a.exe`<br> |• `.\a.exe`|
 
 Replace `<dir>` with your directory name and filename.c with your file eg. hello.c
 
