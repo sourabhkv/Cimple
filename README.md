@@ -13,7 +13,7 @@ C is simple so Cimple<br>
 
 Replace `<dir>` with your directory name and filename.c with your file eg. hello.c
 
-# list of Programs
+# list of C Programs
 1. [Hello world](https://github.com/sourabhkv/Cimple/blob/main/hello_world.c)
 2. [Printing special character](https://github.com/sourabhkv/Cimple/blob/main/specialchar.c)
 3. [Add two numbers](https://github.com/sourabhkv/Cimple/blob/main/add2numbers.c)
@@ -31,3 +31,7 @@ Replace `<dir>` with your directory name and filename.c with your file eg. hello
 15. [Transpose of matrix](https://github.com/sourabhkv/Cimple/blob/main/matrix/transpose.c)
 16. [Selection sort](https://github.com/sourabhkv/Cimple/blob/main/selection_sort.c)
 17. [Binary Search Recursion](https://github.com/sourabhkv/Cimple/blob/main/recursion/Binary.c)
+
+
+# list of python program
+1. [bin2dec and oct2hex]('https://github.com/sourabhkv/Cimple/blob/main/python/p2.py')
