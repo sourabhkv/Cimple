@@ -34,4 +34,4 @@ Replace `<dir>` with your directory name and filename.c with your file eg. hello
 
 
 # list of python program
-1. [bin2dec and oct2hex]('https://github.com/sourabhkv/Cimple/blob/main/python/p2.py')
+1. [bin2dec and oct2hex](https://github.com/sourabhkv/Cimple/blob/main/python/p2.py)
