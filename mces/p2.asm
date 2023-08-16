@@ -1,0 +1,20 @@
+    AREA CODE, FACT, READONLY
+
+ENTRY
+    MOV R0 , #3
+    MOV R1 , R0
+
+FACT
+    SUBS R1,R1,#1
+    CMP R1,#0
+    BNE STOP
+    MUL R3, R0, R1
+    MOV R0, R3
+    BNE FACT
+
+STOP
+
+BACK B BACK
+    NOP
+    NOP
+    END
