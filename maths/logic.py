@@ -4,8 +4,8 @@ def bij(n,m):
         return factorial(n)
     return 0
 
-def one_one(n,m):
-    if n<=m:
+def one_one(m,n):
+    if m<=n:
         return perm(n,m)
     return 0
 
