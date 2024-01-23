@@ -1,0 +1,412 @@
+---------------P1------------------
+#Create Simulator object
+
+set  ns [new Simulator]
+
+#Open trace file
+set  nt [open lab1.tr w]
+$ns trace-all $nt
+
+#Open namtrace file
+set  nf [open lab1.nam w]
+$ns namtrace-all $nf
+
+ #Create nodes 
+ set n0 [$ns node] 
+ set n1 [$ns node] 
+ set n2 [$ns node] 
+ set n3 [$ns node]
+
+#Assign color to the packet
+$ns color 1 Blue
+$ns color 2 Red
+
+#label nodes
+$n0 label "Source/udp0"
+$n1 label "Source/udp1"
+$n2 label "Router"
+$n3 label "Destination/null"
+
+#create links, specify the type, nodes, bandwidth, delay and ARQ algorithm for it
+
+$ns duplex-link $n0 $n2 10Mb 300ms DropTail
+$ns duplex-link $n1 $n2 10Mb 300ms DropTail
+$ns duplex-link $n2 $n3 100Kb 300ms DropTail
+
+#set queue size between the nodes
+$ns queue-limit $n0 $n2 10
+$ns queue-limit $n1 $n2 10
+$ns queue-limit $n2 $n3 5
+
+ #create and attach UDP agent to n0, n1 and Null agent to n3
+ set udp0 [new Agent/UDP]
+ $ns attach-agent $n0 $udp0
+set udp1 [new Agent/UDP]
+$ns attach-agent $n1 $udp1
+set null3 [new Agent/Null]
+$ns attach-agent $n3 $null3
+
+#attach Application cbr to udp
+set cbr0 [new Application/Traffic/CBR]
+$cbr0 attach-agent $udp0
+set cbr1 [new Application/Traffic/CBR]
+$cbr1 attach-agent $udp1
+
+#set udp0 packet to red color and udp1 packet to blue color
+$udp0 set class_ 1
+$udp1 set class_ 2
+
+#connect the agents
+$ns connect $udp0 $null3
+$ns connect $udp1 $null3
+
+#set packet size and interval for cbr1
+$cbr1 set packetSize_ 500Mb
+$cbr1 set interval_ 0.005
+
+ #finish procedure 
+proc finish { } {
+global ns nf nt
+$ns flush-trace
+exec nam lab1.nam & 
+close $nt
+close  $nf 
+exit 0
+}
+$ns at 0.1 "$cbr0 start"
+$ns at 0.1 "$cbr1 start"
+$ns at 10.0 "finish"
+$ns run
+
+
+
+
+
+BEGIN { count=0;
+}
+{
+    if ($1=="d")
+        count++
+} 
+END{
+             printf("Number of packets dropped is = %d\n", count);
+}
+
+
+------------------ P2 -------------------------
+
+
+#create Simulator class
+set ns [new Simulator]
+
+#open trace file
+set nt [open lab2.tr w]
+$ns trace-all $nt
+
+#create Topography object
+set topo [new Topography]
+
+#define grid size
+$topo load_flatgrid 1000 1000
+
+#open namtrace file
+set nf [open lab2.nam w]
+$ns namtrace-all-wireless $nf 1000 1000
+
+#specify node configuration
+$ns node-config -adhocRouting DSDV \
+-llType LL \
+-macType Mac/802_11 \
+-ifqType Queue/DropTail \
+-ifqLen 20 \
+-phyType Phy/WirelessPhy \
+-channelType Channel/WirelessChannel \
+-propType Propagation/TwoRayGround \
+-antType Antenna/OmniAntenna \
+-topoInstance $topo \
+-agentTrace ON \
+-routerTrace ON
+
+#create a General Operation Director(god) object that stores the total number of mobile nodes.
+create-god 4
+
+#create nodes and label them
+set n0 [$ns node]
+set n1 [$ns node] 
+set n2 [$ns node] 
+set n3 [$ns node]
+$n0 label "tcp0"
+$n1 label "sink0"
+$n2 label "bs1"
+$n3 label "bs2"
+#give initial x, y, z coordinates to nodes
+$n0 set X_ 110
+$n0 set Y_ 500
+$n0 set Z_ 0
+$n1 set X_ 600
+$n1 set Y_ 500
+$n1 set Z_ 0
+$n2 set X_ 300
+$n2 set Y_ 500
+$n2 set Z_ 0
+$n3 set X_ 450
+$n3 set Y_ 500
+$n3 set Z_ 0
+#attach agent and application to nodes and connect them
+set tcp0 [new Agent/TCP]
+$ns attach-agent $n0 $tcp0
+set ftp0 [new Application/FTP]
+$ftp0 attach-agent $tcp0
+set sink1 [new Agent/TCPSink]
+$ns attach-agent $n1 $sink1
+$ns connect $tcp0 $sink1
+
+#schedule the event
+$ns at 0.5 "$ftp0 start"
+
+#set up a destination for mobile nodes. They move to <x><y> coordinates at <s>m/s.
+$ns at 0.3 "$n0 setdest 110 500 10"
+$ns at 0.3 "$n1 setdest 600 500 20"
+$ns at 0.3 "$n2 setdest 300 500 30"
+$ns at 0.3 "$n3 setdest 450 500 30"
+$ns at 10.0 "$n0 setdest 100 550 5"
+$ns at 10.0 "$n1 setdest 630 450 5"
+$ns at 70.0 "$n0 setdest 170 680 5"
+$ns at 70.0 "$n1 setdest 580 380 5"
+
+$ns at 120.0 "$n0 setdest 140 720 5"
+$ns at 135.0 "$n0 setdest 110 600 5"
+$ns at 140.0 "$n1 setdest 600 550 5"
+$ns at 155.0 "$n0 setdest 89 500 5"
+$ns at 190.0 "$n0 setdest 100 440 5"
+$ns at 210.0 "$n1 setdest 700 600 5"
+$ns at 240.0 "$n1 setdest 650 500 5" 
+
+
+
+
+proc finish { } {
+global ns nt nf
+$ns flush-trace
+exec nam lab42.nam & 
+close $nt
+close $nf 
+exit 0
+}
+$ns at 400 "finish"
+$ns run
+
+
+
+
+BEGIN{
+PktsSent=0; 
+PktsRcvd=0; 
+PktsAtRTR=0;
+}
+{
+if(($1=="s")&&($4=="RTR")&&($7=="tcp")) PktsAtRTR++;
+if(($1=="s")&&($4=="AGT")&&($7=="tcp")) PktsSent++;
+if(($1=="r")&&($4=="AGT")&&($7=="tcp")) PktsRcvd++;
+}
+END{
+print " Number of Packets Sent :" PktsSent
+print " Number of Packets Received :" PktsRcvd
+print " Pacjet Delivery Ratio :" PktsRcvd/PktsSent*100 
+print " Routing Load :" PktsAtRTR/PktsRcvd
+}
+
+
+--------------------------P3----------------------------------
+import java.util.Scanner;
+public class CRC 
+{
+        public static int n;
+    public static void main(String[] args)
+    {
+        Scanner sc=new Scanner(System.in); 
+        CRC crc=new CRC();
+        String copy,rec,code,zero="0000000000000000";
+        System.out.println("enter the dataword to be sent"); 
+        code=sc.nextLine();
+        n=code.length();
+        System.out.println("Length of the dataword="+n); 
+
+        copy=code; 
+        code+=zero; 
+        code=crc.divide(code);
+        System.out.println("dataword="+copy); 
+        copy=copy.substring(0,n)+code.substring(n);
+        System.out.print("CRC="); 
+        System.out.println(code.substring(n));
+        System.out.println("transmitted frame is="+copy);
+        System.out.println("enter received data:"); 
+        rec=sc.nextLine();
+        if(zero.equals(crc.divide(rec).substring(n))) 
+        System.out.println("correct bits received"); 
+        else
+        System.out.println("received frame contains one or more error");
+        sc.close();
+    }
+    public String divide(String s)
+    {
+        String div="10001000000100001";
+        int i,j;
+        char x;
+        for(i=0;i<n;i++)
+        {
+            x=s.charAt(i);
+            for(j=0;j<17;j++)
+            {
+            if(x=='1')
+            {
+                if(s.charAt(i+j)!=div.charAt(j)) 
+                    s=s.substring(0,i+j)+"1"+s.substring(i+j+1);
+                else
+                    s=s.substring(0,i+j)+"0"+s.substring(i+j+1);
+            }
+        }
+    }
+    return s;
+    }
+}
+/*
+ 
+Output:
+# java CRC
+enter the dataword to be sent
+1100
+dataword=1100
+CRC=1100000110001100
+transmitted frame is=11001100000110001100
+enter received data:
+11001100000110001101
+received frame contains one or more error
+
+# java CRC
+enter the dataword to be sent
+1100
+dataword=1100
+CRC=1100000110001100
+transmitted frame is=11001100000110001100
+enter received data:
+11001100000110001100
+correct bits received
+
+ */
+
+
+
+--------------------------------p4-------------------------
+#create Simulator object
+set ns [new Simulator]
+
+#open trace file
+set nt [open Lab4.tr w]
+$ns trace-all $nt
+
+#open namtrace file
+set nf [open Lab4.nam w]
+$ns namtrace-all $nf
+
+#create nodes
+set n0 [$ns node] 
+set n1 [$ns node] 
+set n2 [$ns node] 
+set n3 [$ns node] 
+set n4 [$ns node] 
+set n5 [$ns node]
+
+#label nodes
+
+$n0 label "ping0"
+$n1 label "ping1"
+$n2 label "ping2"
+$n3 label "ping3"
+$n4 label "ping4"
+$n5 label "router"
+
+#create links, specify the type, nodes, bandwidth, delay and ARQ algorithm for it
+$ns duplex-link $n0 $n5 1Mb 10ms DropTail
+$ns duplex-link $n1 $n5 1Mb 10ms DropTail
+$ns duplex-link $n2 $n5 1Mb 10ms DropTail
+$ns duplex-link $n3 $n5 1Mb 10ms DropTail
+$ns duplex-link $n4 $n5 1Mb 10ms DropTail
+
+#set queue length
+$ns queue-limit $n0 $n5 5
+$ns queue-limit $n1 $n5 5
+$ns queue-limit $n2 $n5 2
+$ns queue-limit $n3 $n5 5
+$ns queue-limit $n4 $n5 2
+$ns color 2 Red
+$ns color 3 Blue
+$ns color 4 Green
+$ns color 5 Yellow
+#define ‘recv’ function for class Agent/Ping
+Agent/Ping instproc recv {from rtt} {
+$self instvar node_
+puts "node [$node_ id] received ping answer from $from with round-trip time $rtt ms"
+}
+
+#create ping agent and attach them to node 
+set p0 [new Agent/Ping]
+$ns attach-agent $n0 $p0
+$p0 set class_ 1
+
+set p1 [new Agent/Ping]
+$ns attach-agent $n1 $p1
+$p1 set class_ 2
+
+set p2 [new Agent/Ping]
+$ns attach-agent $n2 $p2
+$p2 set class_ 3
+
+set p3 [new Agent/Ping]
+$ns attach-agent $n3 $p3
+$p3 set class_ 4
+
+set p4 [new Agent/Ping]
+$ns attach-agent $n4 $p4
+$p4 set class_ 5
+
+#connect 2 agents
+$ns connect $p2 $p4
+$ns connect $p3 $p4
+
+proc sendPingPacket { } {
+global ns p2 p3
+
+set intervalTime 0.001 
+set now [$ns now]
+$ns at [expr $now + $intervalTime] "$p2 send"
+$ns at [expr $now + $intervalTime] "$p3 send"
+$ns at [expr $now + $intervalTime] "sendPingPacket"
+}
+
+proc finish { } {
+global ns nt nf
+$ns flush-trace
+close $nt 
+close $nf
+exec nam Lab4.nam & 
+exit 0
+}
+$ns at 0.1 "sendPingPacket"
+$ns at 2.0 "finish"
+$ns run
+
+
+
+
+BEGIN{
+count=0;
+}
+{
+    if($1=="d") 
+    count++
+} 
+END{
+      printf ("Number of packets dropped is = %d\n",count);
+
+}
