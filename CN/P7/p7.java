@@ -24,19 +24,19 @@ public class bucket {
         {
             System.out.print(i+1+"\t"+pkt[i]+"\t");
             if(bucket+pkt[i]<=bsize)
-        {
-            bucket+=pkt[i];
-            System.out.print(bucket+"\tAccept\t\t"+min(bucket,op_rate)+"\n" +"");
-            bucket=sub(bucket,op_rate);
-        }
+            {
+                bucket+=pkt[i];
+                System.out.print(bucket+"\tAccept\t\t"+min(bucket,op_rate)+"\n" +"");
+                bucket=sub(bucket,op_rate);
+            }
 
-        else
-        {
-            int reject=(bucket+pkt[i]-bsize);
-            bucket=bsize;
-            System.out.print(bucket+"\tReject "+reject+"\t"+min(bucket,op_rate)+"\n");
-            bucket=sub(bucket,op_rate);
-        }
+            else
+            {
+                int reject=(bucket+pkt[i]-bsize);
+                bucket=bsize;
+                System.out.print(bucket+"\tReject "+reject+"\t"+min(bucket,op_rate)+"\n");
+                bucket=sub(bucket,op_rate);
+            }
         }
         while(bucket!=0)
         {
@@ -44,12 +44,13 @@ public class bucket {
             bucket=sub(bucket,op_rate);
         }
     }
+    
     static int min(int a,int b)
     {
         return ((a<b)?a:b);
-        }
-        static int sub(int a,int b)
-        {
+    }
+    static int sub(int a,int b)
+    {
         return (a-b)>0?(a-b):0;
     }
 }

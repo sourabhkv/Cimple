@@ -12,7 +12,8 @@ public class bellmanford
     public void BellmanfordpEvaluation(int source,int adj_matrix[][])
     {
     for(int node=1;node<=numb_vert;node++)
-    distance[node]=MAX_VALUE;
+        distance[node]=MAX_VALUE;
+
     distance[source]=0;
     for(int node=1;node<=numb_vert-1;node++)
     {
@@ -23,10 +24,8 @@ public class bellmanford
             {
                 if(adj_matrix[src_node][dest_node]!=MAX_VALUE)
                 {
-                    if(distance[dest_node] > distance[src_node] +
-                        adj_matrix[src_node][dest_node])
-                        distance[dest_node] = distance[src_node] +
-                        adj_matrix[src_node][dest_node];
+                    if(distance[dest_node] > distance[src_node] + adj_matrix[src_node][dest_node])
+                        distance[dest_node] = distance[src_node] + adj_matrix[src_node][dest_node];
                 }
             }
         }
@@ -37,10 +36,8 @@ public class bellmanford
             {
                 if(adj_matrix[src_node][dest_node]!=MAX_VALUE)
                 {
-                    if(distance[dest_node] > distance[src_node] +
-                    adj_matrix[src_node][dest_node])
+                    if(distance[dest_node] > distance[src_node] + adj_matrix[src_node][dest_node])
                     {
-
                         System.out.println("The graph contains negative edge cycle");
                     }
 
@@ -62,22 +59,22 @@ public class bellmanford
         System.out.println("Enter the adjacency matrix");
         for(int src_node=1;src_node<=numb_vert;src_node++)
             for(int dest_node=1;dest_node<=numb_vert;dest_node++)
-        {
+            {
 
-        adj_matrix[src_node][dest_node] = scan.nextInt();
-        if(src_node==dest_node)
-        {
-        adj_matrix[src_node][dest_node]=0;
-        continue;
-        }
-        if(adj_matrix[src_node][dest_node]==0)
-            adj_matrix[src_node][dest_node]=MAX_VALUE;
-        }
-        for(int i=1;i<=numb_vert;i++)
-        {
-            bellmanford bellmanford = new bellmanford(numb_vert);
-            bellmanford.BellmanfordpEvaluation(i,adj_matrix);
-        }
+                adj_matrix[src_node][dest_node] = scan.nextInt();
+                if(src_node==dest_node)
+                {
+                    adj_matrix[src_node][dest_node]=0;
+                    continue;
+                }
+                if(adj_matrix[src_node][dest_node]==0)
+                    adj_matrix[src_node][dest_node]=MAX_VALUE;
+            }
+            for(int i=1;i<=numb_vert;i++)
+            {
+                bellmanford bellmanford = new bellmanford(numb_vert);
+                bellmanford.BellmanfordpEvaluation(i,adj_matrix);
+            }
         scan.close();
     }
 }
