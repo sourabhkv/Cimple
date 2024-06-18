@@ -4,6 +4,7 @@ int n;
 typedef GLfloat point2[2];
 point2 v[3]= {{-2,-1}, {2,-1},{0,1}};
 void triangle( GLfloat *a, GLfloat *b, GLfloat *c)
+/* display one triangle  */
 {
       glVertex2fv(a); 
       glVertex2fv(b);  
@@ -12,6 +13,7 @@ void triangle( GLfloat *a, GLfloat *b, GLfloat *c)
 }
 void divide_triangle(GLfloat *a, GLfloat *b, GLfloat *c, int m)
 {
+/* triangle subdivision using vertex numbers */
     point2 v0, v1, v2;
     int j;
 if(m>0)
@@ -24,6 +26,7 @@ if(m>0)
    divide_triangle(b, v2, v0, m-1);
     }
   else(triangle(a,b,c));
+ /* draw triangle at end of recursion */
 }
 void display()
 {
